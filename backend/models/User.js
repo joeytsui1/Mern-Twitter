@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const passport = require('passport');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
