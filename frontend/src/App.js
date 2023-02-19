@@ -1,13 +1,24 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router-dom';
-import { AuthRoute, ProtectedRoute } from './component/Routes/Routes';
 
-import NavBar from './components/NavBar/NavBar';
+import { AuthRoute } from './component/Routes/Routes';
+import NavBar from './component/NavBar/NavBar';
+
 import MainPage from './component/MainPage/MainPage';
-import LoginForm from './components/SessionForms/LoginForm';
-import SignupForm from './components/SessionForms/SignupForm';
+import LoginForm from './component/SessionForms/LoginForm';
+import SignupForm from './component/SessionForms/SignupForm.js';
+
+import { getCurrentUser } from './store/session';
 
 function App() {
-  return (
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCurrentUser()).then(() => setLoaded(true));
+  }, [dispatch]);
+
+  return loaded && (
     <>
       <NavBar />
       <Switch>
